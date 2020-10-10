@@ -31,9 +31,10 @@ class SingleLinkedList
     public function add($value): void
     {
         $newNode = new Node($value);
-        if ($this->head == null)
+        while ($this->head == null)
         {
-            $this->tail == $newNode;
+            $this->head = $newNode;
+            break;
         }
         $newNode->nextNode = $this->head;
         $this->head = $newNode;
@@ -58,18 +59,20 @@ class SingleLinkedList
     public function remove($value): void
     {
         $node = $this->head;
-        while ($node && $node->node != $value) {
+        if ($node->node == $value)
+        {
+            $this->head = $node->nextNode;
+        }
+        while ($node && $node->nextNode->node != $value) {
             $node = $node->nextNode;
         }
         if ($node != null) {
-            $node->node = null;
+            $node->nextNode = $node->nextNode->nextNode;
         }
     }
 
     public function size(): int
     {
-        # я не прикалываюсь, в тз сказано, что метод должен возвращать кол-во
-        # узлов. Он их возвращает :)
         return Node::$count;
     }
 
@@ -109,7 +112,7 @@ $a->add(30);
 $a->add(40);
 $a->add(50);
 
-echo $a->search(20); // я пытался засунуть это в boolval(), но всё равно выводит 1/0
+echo $a->search(20);
 echo "<hr />";
 
 echo $a->search(30);
