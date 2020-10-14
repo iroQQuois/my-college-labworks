@@ -21,7 +21,7 @@ class SingleLinkedList
 {
     public $head; # головной узел
     public $tail; # последний узел
-    
+
 
     public function __construct()
     {
@@ -103,32 +103,88 @@ class SingleLinkedList
         }
         return $node;
     }
+
+    /*
+    public function insert($pos, $value)
+    {
+        $new = new Node($value);
+        $current = $this->head;
+        if ($current == null)
+        {
+            return false;
+        }
+
+        $count = 0;
+        while ($count <= $pos)
+        {
+            $count++;
+            if (++$count == $pos)
+            {
+
+            }
+        }
+
+        if ($pos == $count)
+        {
+
+        }
+    }
+    */
+
+    public function get(int $pos)
+    {
+        $current = $this->head;
+
+        if ($current == null)
+        {
+            return false;
+        }
+        $count = 0;
+        while ($count < $pos || $current != null)
+        {
+            $current = $current->nextNode;
+            $count++;
+            echo $current->node;
+        }
+
+        if ($pos == $count)
+        {
+            return $current->node;
+        } else {
+            return false;
+        }
+    }
+
+    public function index($value)
+    {
+        $current = $this->head;
+        $count = 0;
+        while ($current != $value || $current != null)
+        {
+            $current = $current->nextNode;
+            $count++;
+        }
+        if ($current == $value)
+        {
+            return $current->node;
+        }
+        return false;
+    }
 }
 
 
-$a = new LinkedList();
+$a = new SingleLinkedList();
 $a->add(20);
 $a->add(30);
 $a->add(40);
 $a->add(50);
 
-echo $a->search(20);
-echo "<hr />";
-
-echo $a->search(30);
-echo "<hr />";
-
-echo $a->search(40);
-echo "<hr />";
-
-echo $a->search(50);
-echo "<hr />";
-
-
-echo $a->search(60);
-echo "<hr />";
+echo $a->search(20) . "\n";
+echo $a->search(30) . "\n";
+//echo $a->search(40) . "\n";
+//echo $a->search(50) . "\n";
+//echo $a->search(60) . "\n";
 
 $a->remove(20);
-echo $a->search(20);
-echo "<hr />";
-echo $a->size();
+echo $a->search(20). "\n";
+echo $a->size() . "\n";
